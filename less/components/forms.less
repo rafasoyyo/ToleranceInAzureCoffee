@@ -1,0 +1,30 @@
+
+.form-tolerance{
+	input[type="text"], textarea{
+		background-color: @gray-lighter;
+		border-color: @gray-lighter;
+		border-radius: 1px;
+		box-shadow: none;
+		&:focus, &.filled{
+			background-color: white;
+			box-shadow: none;
+			border-color: @gray-lighter;
+		}
+	}
+
+	input:checked{
+		&+label.btn{
+		    outline: 0;
+		    background-image: none;
+		    background-color: @gray-lighter;
+		    .box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
+		}
+		&+label .btn{
+		    outline: 0;
+		    background-image: none;
+		    background-color: @gray-lighter;
+		    .box-shadow(inset 0 3px 5px rgba(0,0,0,.125));
+		}
+	}
+
+}

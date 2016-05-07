@@ -1,0 +1,38 @@
+extends main
+
+block profile
+    .col-xs-12.col-md-9.col-md-offset-3
+
+        .col-xs-12.col-md-6
+
+            if user.nombre
+                label(for='nombre') Nombre
+                p#nombre #{user.nombre}
+            
+            if user.apellidos
+                label(for='surname') Apellidos
+                p#surname #{user.apellidos}
+
+            if user.ciudad
+                label(for='city') Localidad
+                p#city #{user.ciudad}
+
+        if  user.image
+            .col-xs-12.col-md-6
+                label Imagen de perfil
+                .text-center
+                    .imagePreview
+                            img(src="#{user.image}")
+
+            .col-xs-12
+                .form-group
+                    label.col-xs-12.row(for='tipo') Intereses
+                    .btn-group.block
+                        each interes in user.intereses
+                            .pad-h-xs.iblock
+                                label
+                                    .logo_alerg.centrado(class="#{interes}")
+                                    .btn.btn-default.square #{interes}
+            
+            .clearfix
+            .pad-v-md

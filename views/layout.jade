@@ -1,0 +1,25 @@
+doctype html
+html(lang="es", ng-app="tolerantApp", ng-strict-di)
+	head
+		title= title
+		meta(name="viewport", content="width=device-width, initial-scale=1.0")
+		link(rel="icon" href="/favicon.ico")
+		link(rel='stylesheet', href='/stylesheets/style.css')
+
+		script(src="//ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js")
+		script(src="//code.angularjs.org/1.4.9/angular.min.js")
+		script(src="//code.angularjs.org/1.4.9/angular-sanitize.min.js")
+		script(src="//code.angularjs.org/1.4.9/angular-resource.min.js")
+		script(src="//code.angularjs.org/1.4.9/angular-animate.min.js")
+		script(src="//code.angularjs.org/1.4.9/angular-touch.min.js")
+		script(src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/1.2.5/ui-bootstrap-tpls.min.js")
+		//- script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js")
+
+	body(class="#{pageName}" ng-controller="body-Ctrl")
+		block header
+		block content
+		block footer
+		
+		block script
+			script(src="/javascripts/scripts.js")
+			script(src="/javascripts/ng_scripts.js")

@@ -1,0 +1,32 @@
+
+header#item-header(ng-controller="header-Ctrl")
+
+    nav.navbar.navbar-fixed-top
+        .container-fluid
+            .navbar-header
+                a.navbar-brand(href='/')
+                    img.logo.pad-h-huge(alt='Brand', src='/images/logo-redondo.png')
+            ul.nav-buttons.pull-right
+                //-.navbar-nav
+                li(role="navigation")
+                    a.btn.btn-brd-white.hover.square.btn-lg(href="/create")  Añadir
+                if !user
+                    li(role="navigation")
+                        button.btn.btn-brd-white.hover.square.btn-lg(ng-click="loginModal()")  Acceder
+                else
+                    li(role="navigation")
+                        a.btn.btn-brd-white.hover.square.btn-lg(href="/users/#{user.username}/profile")  Perfil
+
+    .backgroud_img.background-black-down(style="background-image: url('/images/#{item.clase}.jpg')")
+
+    
+    .item-info.col-xs-10-col-xs-offset-1.col-md-6.col-md-offset-3
+        .iblock.align-middle
+            if item.clase === 'comercio'
+                .logo_comercio.centrado(class="#{item.tipo}")
+            if item.clase === 'producto'
+                .logo_aliment.centrado(class="#{item.tipo}")
+        .iblock.align-middle
+            .pad-h-lg
+                h1.txt-white.unmar  #{item.nombre}
+                h5.txt-white.unmar  Por #{item.autor.nombre}

@@ -1,0 +1,100 @@
+extends main
+
+block profile
+    .col-xs-12.col-md-9.col-md-offset-3
+
+        form.form-tolerance(action="/users/#{user.username}/profile", method="POST", enctype="multipart/form-data")
+            .col-xs-12.col-md-6
+            
+                .form-group
+                    label(for='nombre') Nombre
+                    input#nombre.form-control(type='text' name="nombre" value="#{user.nombre ? user.nombre : ''}")
+                
+                .form-group
+                    label(for='surname') Apellidos
+                    input#surname.form-control(type='text' name="apellidos" value="#{user.apellidos ? user.apellidos : ''}")
+
+                .form-group
+                    label(for='city') Localidad
+                    input#city.form-control(type='text' name="ciudad" value="#{user.ciudad ? user.ciudad : ''}")
+
+            .col-xs-12.col-md-6
+                .form-group
+                    label Imagen de perfil
+                    .text-center
+                        input#photo.hidden(type="file" name="displayImage" onchange="previewImage(this,[256],0.5)")
+                        .imagePreview
+                            if user.image
+                                img(src="#{user.image}")
+                            else
+                                span#no_image No hay imagen de perfil aún
+                        label.btn.btn-default(for="photo") Seleccionar imagen
+
+            p #{user}
+            //- checked=(producto && producto.tipo.toLowerCase() === 'pescado'))
+            .col-xs-12
+                .form-group
+                    label.col-xs-12.row(for='tipo') Intereses
+                    .btn-group.block
+                        .pad-h-xs.iblock
+                            input#gluten.hidden(type="checkbox" name="alergias" value="gluten" checked=(user && user.intereses.indexOf('gluten') != -1))
+                            label(for="gluten")
+                                .logo_alerg.centrado.gluten
+                                .btn.btn-default.square Gluten
+                        
+                        .pad-h-xs.iblock
+                            input#huevo.hidden(type="checkbox" name="alergias" value="huevo" checked=(user && user.intereses.indexOf('huevo') != -1))
+                            label(for="huevo")
+                                .logo_alerg.centrado.huevo
+                                .btn.btn-default.square Huevos
+                        
+                        .pad-h-xs.iblock
+                            input#pescado.hidden(type="checkbox" name="alergias" value="pescado" checked=(user && user.intereses.indexOf('pescado') != -1))
+                            label(for="pescado")
+                                .logo_alerg.centrado.pescado
+                                .btn.btn-default.square Pescado
+                        
+                        .pad-h-xs.iblock
+                            input#moluscos.hidden(type="checkbox" name="alergias" value="moluscos" checked=(user && user.intereses.indexOf('moluscos') != -1))
+                            label(for="moluscos")
+                                .logo_alerg.centrado.moluscos
+                                .btn.btn-default.square Moluscos
+                        
+                        .pad-h-xs.iblock
+                            input#crustaceos.hidden(type="checkbox" name="alergias" value="crustaceos" checked=(user && user.intereses.indexOf('crustaceos') != -1))
+                            label(for="crustaceos")
+                                .logo_alerg.centrado.crustaceos
+                                .btn.btn-default.square Crustaceos
+                        
+                        .pad-h-xs.iblock
+                            input#lacteos.hidden(type="checkbox" name="alergias" value="lacteos" checked=(user && user.intereses.indexOf('lacteos') != -1))
+                            label(for="lacteos")
+                                .logo_alerg.centrado.lacteos
+                                .btn.btn-default.square Lácteos
+                        
+                        .pad-h-xs.iblock
+                            input#secos.hidden(type="checkbox" name="alergias" value="secos" checked=(user && user.intereses.indexOf('secos') != -1))
+                            label(for="secos")
+                                .logo_alerg.centrado.secos
+                                .btn.btn-default.square Frutos secos
+                        
+                        .pad-h-xs.iblock
+                            input#aditivos.hidden(type="checkbox" name="alergias" value="aditivos" checked=(user && user.intereses.indexOf('aditivos') != -1))
+                            label(for="aditivos")
+                                .logo_alerg.centrado.aditivos
+                                .btn.btn-default.square Aditivos
+            
+            .clearfix
+            .pad-v-md
+
+            .text-center
+                button.btn.btn-brd-infolight.square.btn-lg.pad-h-huge(type='submit') Crear
+
+block append script
+    script(src="/javascripts/html5.image.preview.js")
+    script.
+        var initMap = function(){
+            var city = document.getElementById('city')
+            var autocomplete = new google.maps.places.Autocomplete(city, { types: ['(cities)']});
+        }
+    script(src="//maps.googleapis.com/maps/api/js?libraries=places&callback=initMap")

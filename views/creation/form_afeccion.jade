@@ -1,0 +1,89 @@
+
+.col-xs-12
+    
+    h1.h1.unmar Alergias
+    .pad-sm
+
+    form.form-tolerance(action="/creation" method="POST" enctype="multipart/form-data")
+
+        input.hidden(type="text" name="item" value="alergias")
+
+        .form-group
+            label(for='nombre') Nombre de la afección
+            input#nombre.form-control(type='text' name="name")
+
+        .form-group
+            label(for='dsc') Descripción
+            textarea#dsc.form-control(type='text' name="description" rows="5")
+
+        .form-group
+            label(for='sintomas') Sintomas
+            textarea#sintomas.form-control(type='text' name="sintomas" rows="5")
+
+        .row
+            .form-group.col-xs-12.col-md-6
+                label(for='enlace') Enlace
+                input#enlace.form-control(type='text' name="enlace" )
+
+            .form-group.col-xs-12.col-md-6
+                label(for='organismo') Organismo de ayuda
+                input#organismo.form-control(type='text' name="organismo" )
+
+        .form-group
+            label.col-xs-12.row(for='tipo') Englobado en el grupo
+            .btn-group.btn-block.text-center
+                .pad-h-sm.iblock
+                    input#gluten.hidden(type="radio" name="alergias" value="gluten")
+                    label(for="gluten")
+                        .logo_alerg.centrado.gluten
+                        .btn.btn-default.square Gluten
+                
+                .pad-h-sm.iblock
+                    input#huevo.hidden(type="radio" name="alergias" value="huevo")
+                    label(for="huevo")
+                        .logo_alerg.centrado.huevo
+                        .btn.btn-default.square Huevos
+                
+                .pad-h-sm.iblock
+                    input#pescado.hidden(type="radio" name="alergias" value="pescado")
+                    label(for="pescado")
+                        .logo_alerg.centrado.pescado
+                        .btn.btn-default.square Pescado
+                
+                .pad-h-sm.iblock
+                    input#moluscos.hidden(type="radio" name="alergias" value="moluscos")
+                    label(for="moluscos")
+                        .logo_alerg.centrado.moluscos
+                        .btn.btn-default.square Moluscos
+                
+                .pad-h-sm.iblock
+                    input#crustaceos.hidden(type="radio" name="alergias" value="crustaceos")
+                    label(for="crustaceos")
+                        .logo_alerg.centrado.crustaceos
+                        .btn.btn-default.square Crustaceos
+                
+                .pad-h-sm.iblock
+                    input#lacteos.hidden(type="radio" name="alergias" value="lacteos")
+                    label(for="lacteos")
+                        .logo_alerg.centrado.lacteos
+                        .btn.btn-default.square Lácteos
+                
+                .pad-h-sm.iblock
+                    input#secos.hidden(type="radio" name="alergias" value="secos")
+                    label(for="secos")
+                        .logo_alerg.centrado.secos
+                        .btn.btn-default.square Frutos secos
+                
+                .pad-h-sm.iblock
+                    input#aditivos.hidden(type="radio" name="alergias" value="aditivos")
+                    label(for="aditivos")
+                        .logo_alerg.centrado.aditivos
+                        .btn.btn-default.square Aditivos
+                
+
+        .pad-v-md
+
+        .text-center
+            button.btn.btn-brd-infolight.square.btn-lg.pad-h-huge(type='submit') Crear
+
+.clearfix

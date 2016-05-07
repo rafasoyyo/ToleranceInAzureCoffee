@@ -1,0 +1,24 @@
+
+<div class="card radius shadowDepth1 card-tolerance"><a ng-href="{{ '/' + item.clase +'/'+ item.nombre}}">
+    <div class="card__image border-tlr-radius"><img ng-src=" {{ item.image || '/images/trigo.jpg' }} " alt="image" class="border-tlr-radius"/></div>
+    <div class="card__content card__padding">
+      <div class="card__share">
+        <div id="share" class="share-toggle share-icon">
+          <div ng-class="item.clase" class="logo_tipo small"></div>
+        </div>
+      </div>
+      <div class="card__meta">
+        <h2 ng-bind="item.nombre"></h2>
+      </div>
+      <article class="card__article">
+        <p ng-bind="item.description"></p>
+      </article>
+    </div></a>
+  <div class="card__action">
+    <div class="card__author"><img ng-src="{{ item.autor.image || '/images/user.png' }}" alt="user"/>
+      <div class="card__author-content">
+        <div ng-if="item.autor.username"><span>by <span ng-if="item.autor.username === 'Anónimo'" ng-bind="item.autor.username"></span><span ng-if="item.autor.username != 'Anónimo'"><a ng-if="user != 'undefined' " href="/users/{{item.autor.username}}/profile" ng-bind="item.autor.username"></a><span ng-if="user === 'undefined' " ng-bind="item.autor.username"></span></span></span></div>
+      </div>
+    </div>
+  </div>
+</div>

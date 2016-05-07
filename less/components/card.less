@@ -1,0 +1,220 @@
+// Color variables (appears count calculates by raw css)
+@color0: #eeeeee; // Appears 5 times
+@color1: #ffffff; // Appears 5 times
+@color2: #3498db; // Appears 2 times
+@color3: #2980b9; // Appears 2 times
+
+// Width variables (appears count calculates by raw css)
+@width3: 100%; // Appears 2 times
+
+
+// HTML CSS JS Result Edit on @import 'http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'; @import 'http://fonts.googleapis.com/css?family=Roboto:700,400'; *, *:after, *:before  {
+// 	box-sizing: border-box;
+// 	margin: 0;
+// 	padding: 0;
+// }
+// html {
+// 	font-size: 62.5%;
+// }
+// body {
+// 	background-color: @color0;
+// 	color: #666666;
+// 	font-family: Roboto;
+// 	font-size: 1.6em;
+// 	font-weight: 400;
+// 	line-height: 1.6;
+// }
+// a {
+// 	color: @color2;
+// 	text-decoration: none;
+// 	&:hover {
+// 		color: @color3;
+// 	}
+// }
+// h2 {
+// 	line-height: 1.2;
+// 	margin-bottom: 1.6rem;
+// }
+.wrapper {
+	margin: 50px auto;
+	max-width: 400px;
+	padding-left: 1em;
+	padding-right: 1em;
+}
+.border-tlr-radius {
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+}
+.text-center {
+	text-align: center;
+}
+.radius {
+	border-radius: 2px;
+}
+.padding-tb {
+	padding-bottom: 1.6rem;
+	padding-top: 1.6rem;
+}
+.shadowDepth0 {
+	box-shadow: 0 1px 3px rgba(0,0,0, 0.12);
+}
+.shadowDepth1 {
+	box-shadow: 0 1px 3px rgba(0,0,0, 0.12), 0 1px 2px rgba(0,0,0, 0.24);
+}
+.card {
+	background-color: @color1;
+	margin-bottom: 1.6rem;
+}
+.card__padding {
+	padding: 1.6rem;
+}
+.card__image {
+	background-color: @color0;
+	min-height: 100px;
+	img {
+		display: block;
+		max-width: @width3;
+		width: @width3;
+	}
+}
+.card__content {
+	position: relative;
+}
+.card__meta {
+	time {
+		color: #bbbbbb;
+		font-size: 1.5rem;
+		margin-left: 0.8rem;
+	}
+}
+.card__article {
+	a {
+		color: #444444;
+		text-decoration: none;
+		transition: all 0.5s ease;
+		&:hover {
+			color: @color3;
+		}
+	}
+}
+.card__action {
+	overflow: hidden;
+	padding-bottom: 1.6rem;
+	padding-left: 1.6rem;
+	padding-right: 1.6rem;
+}
+.card__author {
+	img {
+		border-radius: 50%;
+		display: inline-block;
+		margin-right: 0.6em;
+		vertical-align: middle;
+	}
+}
+.card__author-content {
+	display: inline-block;
+	vertical-align: middle;
+}
+.card__share {
+	float: right;
+	margin-top: -42px;
+	position: relative;
+}
+.card__social {
+	position: absolute;
+	right: 0;
+	top: 0;
+	transform: translateX(0px);
+	transform: translateZ(0);
+	transition: transform 0.35s ease;
+	visibility: hidden;
+	width: 160px;
+}
+.card__social--active {
+	transform: translateX(-48px);
+	transform: translateZ(0);
+	transition: transform 0.35s ease;
+	visibility: visible;
+}
+.share-toggle {
+	z-index: 2;
+	// &:before {
+	// 	color: @color2;
+	// 	content: "\f1e0";
+	// 	font-family: 'FontAwesome';
+	// }
+	position: relative;
+	.logo_tipo{
+	    position: relative;
+	    top: -26%;
+	    left: -26%;
+	}
+}
+.share-toggle.share-expanded {
+	// &:before {
+	// 	content: "\f00d";
+	// }
+}
+.share-icon {
+	background-color: @color1;
+	border-radius: 50%;
+	box-shadow: 0 2px 4px rgba(0,0,0, 0.12), 0 2px 4px rgba(0,0,0, 0.24);
+	display: inline-block;
+	height: 48px;
+	line-height: 48px;
+	outline: 0;
+	text-align: center;
+	transition: all 0.3s ease;
+	width: 48px;
+	&:hover {
+		-moz-transform: scale(1.2);
+		-ms-transform: scale(1.2);
+		-o-transform: scale(1.2);
+		-webkit-transform: scale(1.2);
+		box-shadow: 0 3px 6px rgba(0,0,0, 0.12), 0 3px 6px rgba(0,0,0, 0.24);
+		transform: scale(1.2);
+	}
+	&:focus {
+		-moz-transform: scale(1.2);
+		-ms-transform: scale(1.2);
+		-o-transform: scale(1.2);
+		-webkit-transform: scale(1.2);
+		box-shadow: 0 3px 6px rgba(0,0,0, 0.12), 0 3px 6px rgba(0,0,0, 0.24);
+		transform: scale(1.2);
+	}
+}
+.facebook {
+	background-color: #3b5998;
+	color: @color1;
+	&:hover {
+		color: @color0;
+	}
+}
+.twitter {
+	background-color: #00abe3;
+	color: @color1;
+	&:hover {
+		color: @color0;
+	}
+}
+.googleplus {
+	background-color: #d3492c;
+	color: @color1;
+	&:hover {
+		color: @color0;
+	}
+}
+
+.card-tolerance{
+	.card__image{
+		height: 190px;
+    	overflow: hidden;
+    }
+	.card__author {
+		img {
+			width: 50px;
+			height: 50px;
+			border: 1px solid rgba(100, 100, 100, .5);
+		}
+	}
+}

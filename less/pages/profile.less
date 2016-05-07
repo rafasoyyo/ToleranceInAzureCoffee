@@ -1,0 +1,39 @@
+#profile-nav{
+	// width: inherit;
+	position: fixed;
+	// padding-right: 45px;
+	@media screen and (max-width: @screen-sm-max){
+		position: relative;
+		margin-bottom: 20px;
+	}
+	@media screen and (min-width: @screen-lg){
+		margin-left: -90px;
+	}
+
+	.btn-group-vertical{
+		width: 100%;
+		box-shadow: 2px 2px 4px -2px @gray-light;
+		a{
+			text-decoration: none;
+		}
+	}
+}
+
+.imagePreview{
+	max-height: 250px;
+	span#no_image{
+	    padding: 30px;
+	    margin: 20px;
+	    display: block;
+	    border: 1px dashed rgb(204, 204, 204);
+	}
+	img{
+		max-width: 100%;
+		max-height: 200px;
+		width: initial;
+	}
+	p{
+	margin-top: -10px;
+	position: relative;
+	}
+}

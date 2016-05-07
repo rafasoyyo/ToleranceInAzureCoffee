@@ -1,0 +1,21 @@
+
+header(ng-controller="header-Ctrl")
+
+    nav.navbar.navbar-default.navbar-fixed-top
+        .container-fluid
+            .navbar-header
+                a.navbar-brand(href='/')
+                    img.logo.pad-h-huge(alt='Brand', src='/images/logo-redondo.png')
+            ul.nav-buttons.pull-right
+                //-.navbar-nav
+                li(role="navigation")
+                    a.btn.btn-brd-success.square.btn-lg(href="/create")  Añadir
+                if !user
+                    li(role="navigation")
+                        button.btn.btn-brd-success.square.btn-lg(ng-click="loginModal()")  Acceder
+                if user && !user.isowner
+                    li(role="navigation")
+                        if loggued
+                            a.btn.btn-brd-success.square.btn-lg(href="/users/#{loggued.username}/profile")  Perfil
+                        else
+                            a.btn.btn-brd-success.square.btn-lg(href="/users/#{user.username}/profile")  Perfil

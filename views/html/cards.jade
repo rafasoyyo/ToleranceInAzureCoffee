@@ -1,0 +1,22 @@
+.card.radius.shadowDepth1.card-tolerance
+    a(ng-href="{{ '/' + item.clase +'/'+ item.nombre}}")
+        .card__image.border-tlr-radius
+            img.border-tlr-radius(ng-src=" {{ item.image || '/images/trigo.jpg' }} ", alt='image')
+        .card__content.card__padding
+            .card__share
+                #share.share-toggle.share-icon
+                    .logo_tipo.small(ng-class="item.clase")
+            .card__meta
+                h2(ng-bind="item.nombre")
+            article.card__article
+                p(ng-bind="item.description")
+    .card__action
+        .card__author
+            img(ng-src="{{ item.autor.image || '/images/user.png' }}", alt='user')
+            .card__author-content
+                div(ng-if="item.autor.username")
+                    span by 
+                        span(ng-if="item.autor.username === 'Anónimo'" ng-bind="item.autor.username")
+                        span(ng-if="item.autor.username != 'Anónimo'")
+                            a(ng-if="user != 'undefined' " href="/users/{{item.autor.username}}/profile" ng-bind="item.autor.username")
+                            span(ng-if="user === 'undefined' " ng-bind="item.autor.username")

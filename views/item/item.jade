@@ -1,0 +1,91 @@
+extends ../layout
+
+
+block header
+    include header
+
+block content
+    .container(ng-controller="item-Ctrl")
+        .col-xs-12.col-md-4.pull-right
+    
+            if user
+                #fav.pad-h-md.pad-v-lg.bg-info
+                    h4.bold.unmar.inline Favorito:
+                        i.fa.pad-h-sm(ng-click="save_fav('#{user.id}', '#{item._id}')", class="#{user.lugarFAV.indexOf(item._id)!=-1 || user.productoFAV.indexOf(item._id)!=-1 || user.afeccionFAV.indexOf(item._id)!=-1 ? 'fa-star' : 'fa-star-o' }")
+            
+            if item.image
+                .pad-xs
+                    img.img-thumbnail(alt="Cinque Terre" src="#{item.image}")
+
+            .pad-xs
+
+            .pad-h-md.pad-v-lg.bg-info
+                h4.bold.unmar Autor:   
+                    .pad-v-xs
+                    img.img-circle.inline(src="#{ item.autor.image || '/images/user.png' }", width="100", height="100", alt='user')      
+                    if user && item.autor.nombre != 'Anónimo'
+                        a.unmar.inline.pad-h-xs(href="/user/#{item.autor.nombre}") #{item.autor.nombre}
+                    else
+                        .unmar.inline.pad-h-xs #{item.autor.nombre}
+
+            if user && (item.autor._id === user._id || user.rol != 'USER')
+                .pad-xs
+                a.btn.btn-lg.btn-block.btn-brd-infolight.square(href="/#{ item.clase + '/edit/' + item.url}") Editar esta ficha
+
+        .col-xs-12.col-md-8
+            .row
+                h4.bold.unmar Descipción:
+                p.pad-xs #{item.descripcion}
+
+            if item.etiquetas && item.etiquetas.length > 0
+                //- p #{item.etiquetas.length}
+                .row.btn-bloch 
+                    h4.bold.unmar Etiquetas:
+                    each tag in item.etiquetas
+                        if tag.legth
+                            .iblock.pad-xs
+                                button.btn.btn-info #{tag}
+            
+            .pad-v-sm
+            .row
+                h4.bold.unmar Comentarios:
+                .pad-xs
+
+            div.hidden(ng-init="clase= '#{item.clase}' ; ident= '#{item._id}' ")
+            div(ng-if="comments.length")
+                #comment-block
+                    div(ng-if="comments" ng-repeat="comment in comments | limitTo : limited ")                       
+                        .row.pad-v-xs.alert.alert-info
+                            .media.pad-xs
+                                .media-left
+                                    a
+                                        img.img-circle.bg-white(ng-src="{{comment.autor.image ? comment.autor.image : '/images/user.png' }}")
+                                .media-body
+                                    p.unmar {{comment.autor.username}} - {{comment.created | date : 'dd/MM/yyyy'}}
+                                     //- - #{moment(item.comentarios[c].created).format("DD/MM/YYYY")}
+                                    h4.media-heading(ng-bind="comment.mensaje")
+
+                    .text-center(ng-if="limited < comments.length")
+                        .btn.btn-info.pad-h-md(ng-click="see_comment()") 
+                            i.fa.fa-plus.txt-white.pad-h-xs
+                            span.txt-white Ver más
+
+                .pad-v-lg
+
+
+            .row
+                if user
+                    form#product_comment.form-tolerance(name="product_comment" ng-submit="post_comment('#{item.clase}', '#{item._id}')" novalidate)
+                        textarea.form-control(name="comment_comentario" ng-model="comment.comentario" rows="5" required)
+                        .pad-xs
+                        span.txt-error(style="position:absolute" ng-if="product_comment.$submitted && product_comment.comment_comentario.$error.required") No hay comentarios que guardar
+                        input.btn.btn-sm.btn-brd-infolight.pull-right(type="submit" value="Comentar")
+                else
+                    .bg-success.pad-md
+                        .text-center
+                            h3 Inicia sesion para añadir comentarios
+                            .btn.btn-brd-white.hover Inicia Sesión
+
+        .clearfix
+        .pad-huge
+        p #{item}

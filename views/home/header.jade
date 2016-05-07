@@ -1,0 +1,27 @@
+
+header(ng-controller="header-Ctrl" class="#{pageName.toLowerCase()}")
+	.backgroud_img.hidden-xs
+		.col-xs-8.col-xs-offset-2.col-lg-6.col-lg-offset-3.v-central.text-center
+			h1.h1.txt-white Disfruta de la comida compartiendo y aprendiendo buenos hábitos ;!
+
+	nav.navbar.navbar-fixed-top
+		.container-fluid
+			.navbar-header
+				a.navbar-brand(href='/')
+					img.logo.pad-h-huge(alt='Brand', src='./images/logo-redondo.png')
+			ul.nav-buttons.pull-right
+				//-.navbar-nav
+				li(role="navigation")
+					a.btn.btn-brd-white.hover.square.btn-lg(href="/create")  Añadir
+				if !user
+					li(role="navigation")
+						button.btn.btn-brd-white.hover.square.btn-lg(ng-click="loginModal()")  Acceder
+				else
+					li(role="navigation")
+						a.btn.btn-brd-white.hover.square.btn-lg(href="/users/#{user.username}/profile")  Perfil
+
+	form#search.col-xs-9.col-xs-offset-2.col-sm-8.col-sm-offset-2.col-md-6.col-md-offset-3
+		.input-group
+			input.form-control.input(type='text', placeholder='Search for...', class="#{if input-lg}" ng-model="$shared.finder" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 750, 'blur': 100 } }")
+			span.input-group-btn
+				button.btn.btn-default.btn(type='button') Buscar

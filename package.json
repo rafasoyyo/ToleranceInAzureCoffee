@@ -1,0 +1,52 @@
+{
+  "name": "toleranceinazurecoffee",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "async": "^2.0.0-rc.2",
+    "body-parser": "~1.10.2",
+    "coffee-script": "^1.8.0",
+    "colors": "^1.1.2",
+    "compression": "^1.6.1",
+    "connect-mongo": "^1.1.0",
+    "cookie-parser": "~1.3.3",
+    "debug": "~2.1.1",
+    "express": "^4.13.3",
+    "serve-favicon": "^2.3.0",
+    "morgan": "^1.6.1",
+    "cookie-parser": "^1.3.3",
+    "body-parser": "^1.13.3",
+    "jade": "^1.11.0",
+    "lodash": "^4.8.2",
+    "mkdirp": "^0.5.1",
+    "moment": "^2.13.0",
+    "mongoose": "^4.4.11",
+    "morgan": "~1.5.1",
+    "multer": "^1.1.0",
+    "nodemailer": "^2.3.1",
+    "passport": "^0.3.2",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^4.0.0",
+    "serve-favicon": "^2.2.1"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.9.1",
+    "grunt": "^0.4.5",
+    "grunt-develop": "^0.4.0",
+    "grunt-contrib-coffee": "^1.0.0",
+    "grunt-contrib-jade": "^1.0.0",
+    "grunt-contrib-less": "^1.2.0",
+    "grunt-contrib-uglify": "^1.0.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-livereload": "^0.1.3",
+    "grunt-ng-annotate": "^2.0.1",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-livereload": "^3.8.1",
+    "jit-grunt": "^0.10.0",
+    "time-grunt": "^1.2.1",
+    "load-grunt-tasks": "^3.2.0"
+  }
+}

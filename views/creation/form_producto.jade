@@ -1,0 +1,161 @@
+
+.col-xs-12
+    
+    h1.h1.unmar Producto
+    .pad-sm
+    form.form-tolerance(action="#{producto ? '/producto/edit/' + producto.nombre : '/producto' }" method="POST" enctype="multipart/form-data")
+
+        //- input.hidden(type="text" name="item" value="producto")
+
+        .row
+            .col-xs-12.col-md-9
+                .form-group
+                    label(for='nombre') Nombre de producto
+                    input#nombre.form-control(type='text' name="name" value="#{producto ? producto.nombre : ''}" disabled=(producto && producto.nombre) )
+
+                .form-group
+                    label(for='dsc') descripción
+                    textarea#dsc.form-control(type='text' name="description" rows="5")
+                        | #{producto ? producto.descripcion : ''}
+
+            .col-xs-12.col-md-3
+                .form-group
+                    label Imagen
+                    .text-center
+                        input#photo_producto.hidden(type="file" name="displayImage" onchange="previewImage(this,[256],0.5)")
+                        .imagePreview
+                            if producto && producto.image
+                                img(src="#{producto.image}")
+                            else
+                                span#no_image No hay imagen de perfil aún
+                        label.btn.btn-default(for="photo_producto") Seleccionar imagen
+
+        .row
+            .form-group.col-xs-12.col-md-6
+                label(for='recom') Recomendado para 
+                textarea#dsc.form-control(type='text' name="recomended" row="5")
+                    | #{producto ? producto.recomendado : ''}
+            
+            .form-group.col-xs-12.col-md-6
+                label(for='norecom') No recomendado para
+                textarea#dsc.form-control(type='text' name="notrecomended" row="5" )
+                    | #{producto ? producto.norecomendado : ''}
+
+        .form-group
+            label(for='tags') Etiquetas
+            span.small (lista separada por comas)
+            input#tags.form-control(type='text' name="tags" value="#{producto ? producto.etiquetas : ''}")
+
+        .form-group
+            label Tipo de alimento
+            .clearfix
+            .btn-group.block.text-center
+                .pad-md.iblock.align-top
+                    input#pescado.hidden(type="radio" name="tipo" value="pescado" checked=(producto && producto.tipo.toLowerCase() === 'pescado'))
+                    label(for="pescado")
+                        .logo_aliment.centrado.pescado
+                        .btn.btn-block.btn-default.square Pescado
+
+                .pad-md.iblock.align-top
+                    input#fruta.hidden(type="radio" name="tipo" value="fruta" checked=(producto && producto.tipo.toLowerCase() === 'fruta'))
+                    label(for="fruta")
+                        .logo_aliment.centrado.fruta
+                        .btn.btn-block.btn-default.square Fruta
+
+                .pad-md.iblock.align-top
+                    input#bebidas_calientes.hidden(type="radio" name="tipo" value="bebidas_calientes" checked=(producto && producto.tipo.toLowerCase() === 'bebidas_calientes'))
+                    label(for="bebidas_calientes")
+                        .logo_aliment.centrado.bebidas_calientes
+                        .btn.btn-block.btn-default.square 
+                            | Bebidas <br/>
+                            | calientes
+
+                .pad-md.iblock.align-top
+                    input#carne.hidden(type="radio" name="tipo" value="carne" checked=(producto && producto.tipo.toLowerCase() === 'carne'))
+                    label(for="carne")
+                        .logo_aliment.centrado.carne
+                        .btn.btn-block.btn-default.square Carne
+
+                .pad-md.iblock.align-top
+                    input#cereales.hidden(type="radio" name="tipo" value="cereales" checked=(producto && producto.tipo.toLowerCase() === 'cereales'))
+                    label(for="cereales")
+                        .logo_aliment.centrado.cereales
+                        .btn.btn-block.btn-default.square Cereales
+
+                .pad-md.iblock.align-top
+                    input#preparados.hidden(type="radio" name="tipo" value="preparados" checked=(producto && producto.tipo.toLowerCase() === 'preparados'))
+                    label(for="preparados")
+                        .logo_aliment.centrado.preparados
+                        .btn.btn-block.btn-default.square Preparados
+
+                .pad-md.iblock.align-top
+                    input#moluscos.hidden(type="radio" name="tipo" value="moluscos" checked=(producto && producto.tipo.toLowerCase() === 'moluscos'))
+                    label(for="moluscos")
+                        .logo_aliment.centrado.moluscos
+                        .btn.btn-block.btn-default.square Moluscos
+                        
+                .pad-md.iblock.align-top
+                    input#alcohol.hidden(type="radio" name="tipo" value="alcohol" checked=(producto && producto.tipo.toLowerCase() === 'alcohol'))
+                    label(for="alcohol")
+                        .logo_aliment.centrado.alcohol
+                        .btn.btn-block.btn-default.square Alcohol
+
+                .pad-md.iblock.align-top
+                    input#legumbres.hidden(type="radio" name="tipo" value="legumbres" checked=(producto && producto.tipo.toLowerCase() === 'legumbres'))
+                    label(for="legumbres")
+                        .logo_aliment.centrado.legumbres
+                        .btn.btn-block.btn-default.square Legumbres
+
+                .pad-md.iblock.align-top
+                    input#postres.hidden(type="radio" name="tipo" value="postres" checked=(producto && producto.tipo.toLowerCase() === 'postres'))
+                    label(for="postres")
+                        .logo_aliment.centrado.postres
+                        .btn.btn-block.btn-default.square Postres
+
+                .pad-md.iblock.align-top
+                    input#verduras.hidden(type="radio" name="tipo" value="verduras" checked=(producto && producto.tipo.toLowerCase() === 'verduras'))
+                    label(for="verduras")
+                        .logo_aliment.centrado.verduras
+                        .btn.btn-block.btn-default.square Verduras
+
+                .pad-md.iblock.align-top
+                    input#azucaradas.hidden(type="radio" name="tipo" value="azucaradas" checked=(producto && producto.tipo.toLowerCase() === 'azucaradas'))
+                    label(for="azucaradas")
+                        .logo_aliment.centrado.azucaradas
+                        .btn.btn-block.btn-default.square 
+                            | Bebidas </br>
+                            | azucaradas
+
+                .pad-md.iblock.align-top
+                    input#secos.hidden(type="radio" name="tipo" value="secos" checked=(producto && producto.tipo.toLowerCase() === 'secos'))
+                    label(for="secos")
+                        .logo_aliment.centrado.secos
+                        .btn.btn-block.btn-default.square Secos
+
+                .pad-md.iblock.align-top
+                    input#huevos.hidden(type="radio" name="tipo" value="huevos" checked=(producto && producto.tipo.toLowerCase() === 'huevos'))
+                    label(for="huevos")
+                        .logo_aliment.centrado.huevo
+                        .btn.btn-block.btn-default.square 
+                            | Huevos o <br/>
+                            | derivados
+
+                .pad-md.iblock.align-top
+                    input#aditivos.hidden(type="radio" name="tipo" value="aditivos" checked=(producto && producto.tipo.toLowerCase() === 'aditivos'))
+                    label(for="aditivos")
+                        .logo_aliment.centrado.aditivos
+                        .btn.btn-block.btn-default.square Aditivos
+
+                .pad-md.iblock.align-top
+                    input#lacteos.hidden(type="radio" name="tipo" value="lacteos" checked=(producto && producto.tipo.toLowerCase() === 'lacteos'))
+                    label(for="lacteos")
+                        .logo_aliment.centrado.lacteos
+                        .btn.btn-block.btn-default.square Lácteos
+
+
+        .pad-v-md
+
+        .text-center
+            button.btn.btn-brd-infolight.square.btn-lg.pad-h-huge(type='submit') Crear
+
+.clearfix

@@ -1,0 +1,94 @@
+
+.col-xs-12
+    
+    h1.h1.unmar Comercio
+    .pad-sm
+
+    //- form.form-tolerance(action="/creation" method="POST" enctype="multipart/form-data")
+    form.form-tolerance(action="#{comercio ? '/comercio/edit/' + comercio.nombre : '/comercio' }" method="POST" enctype="multipart/form-data")
+
+        //- input.hidden(type="text" name="item" value="comercio")
+
+        .row
+            .col-xs-12.col-md-9
+                .form-group
+                    label(for='nombre') Nombre de comercio
+                    input#nombre.form-control(type='text' name="name" value="#{comercio ? comercio.nombre : ''}" disabled=(comercio && comercio.nombre) )
+
+                .form-group
+                    label(for='dsc') Descripción
+                    textarea#dsc.form-control(type='text' name="description" rows="5")
+                        | #{comercio ? comercio.descripcion : ''}
+        
+            .col-xs-12.col-md-3
+                .form-group
+                    label Imagen
+                    .text-center
+                        input#photo_comercio.hidden(type="file" name="displayImage" onchange="previewImage(this,[256],0.5)")
+                        .imagePreview
+                            if comercio && comercio.image
+                                img(src="#{comercio.image}")
+                            else
+                                span#no_image No hay imagen de producto aún
+                        label.btn.btn-default(for="photo_comercio") Seleccionar imagen
+
+
+        .row
+            .form-group.col-xs-12.col-md-6
+                label(for='direccion') Dirección
+                input#direccion.form-control(type='text' name="direccion" value="#{comercio ? comercio.direccion : ''}")
+
+            .form-group.col-xs-12.col-md-6
+                label(for='tel') Teléfono
+                input#tel.form-control(type='text' name="telefono" value="#{comercio ? comercio.telefono : ''}")
+
+        .row
+            .form-group.col-xs-12.col-md-6
+                label(for='web') Web
+                input#web.form-control(type='text' name="web" value="#{comercio ? comercio.web : ''}")
+
+            .form-group.col-xs-12.col-md-6
+                label(for='especialidad') Especialidad
+                textarea#dsc.form-control(type='text' name="especialidad" row="5")
+                    | #{comercio ? comercio.especialidad : ''}
+
+        .form-group
+            label(for='tags') Etiquetas
+            span.small (lista separada por comas)
+            input#tags.form-control(type='text' name="tags" value="#{comercio ? comercio.etiquetas : ''}")
+
+        .form-group
+            label.col-xs-12.row(for='tipo') Tipo de comercio
+            .btn-group.btn-block.text-center
+                .pad-h-sm.iblock
+                    input#especializado.hidden(type="radio" name="tipo" value="especializado" checked=(comercio && comercio.tipo && comercio.tipo.toLowerCase() === 'especializado'))
+                    label(for="especializado") 
+                        .logo_comercio.centrado.especializado
+                        .btn.btn-block.btn-default.square Especializado
+                .pad-h-sm.iblock
+                    input#herboristeria.hidden(type="radio" value="herboristeria" checked=(comercio && comercio.tipo && comercio.tipo.toLowerCase() === 'herboristeria'))
+                    label(for="herboristeria") 
+                        .logo_comercio.centrado.herboristeria
+                        .btn.btn-block.btn-default.square Herboristería
+                .pad-h-sm.iblock
+                    input#hiper.hidden(type="radio" name="tipo" value="hiper" checked=(comercio && comercio.tipo && comercio.tipo.toLowerCase() === 'hiper'))
+                    label(for="hiper") 
+                        .logo_comercio.centrado.hiper
+                        .btn.btn-block.btn-default.square Gran superficie
+                .pad-h-sm.iblock
+                    input#generico.hidden(type="radio" name="tipo" value="generico" checked=(comercio && comercio.tipo && comercio.tipo.toLowerCase() === 'generico'))
+                    label(for="generico") 
+                        .logo_comercio.centrado.generico
+                        .btn.btn-block.btn-default.square Genérico
+                .pad-h-sm.iblock
+                    input#otros.hidden(type="radio" name="tipo" value="otros" checked=(comercio && comercio.tipo && comercio.tipo.toLowerCase() === 'otros'))
+                    label(for="otros")
+                        .logo_comercio.centrado.otros
+                        .btn.btn-block.btn-default.square Otros
+
+        .pad-v-md
+
+        .text-center
+            button.btn.btn-brd-infolight.square.btn-lg.pad-h-huge(type='submit') Crear
+
+.clearfix

@@ -1,0 +1,86 @@
+
+<div id="login-container" class="col-xs-12 col-md-6 pad-h-huge">
+  <form id="login_form" name="login_form" ng-submit="login_submit()" novalidate="novalidate" class="pad-v-lg">
+    <div class="text-center">
+      <h1 class="bold">Acceso      </h1>
+    </div>
+    <div class="form-group">
+      <label>Nombre de usuario</label>
+      <input type="text" name="login_nickname" ng-model="login.username" required="required" class="form-control square"/><span ng-if="login_form.$submitted"><span ng-show="login_form.login_nickname.$error.required" class="txt-error">El nombre de usuario es necesario</span></span>
+    </div>
+    <div class="form-group">
+      <label>Contraseña</label>
+      <input type="password" name="login_password" ng-model="login.password" required="required" class="form-control square"/><span ng-if="login_form.$submitted"><span ng-show="login_form.login_password.$error.required" class="txt-error">La contraseña es necesaria</span></span>
+    </div>
+    <div class="text-right">
+      <div id="forgot-password">Has olvidado tu contraseña?</div>
+      <div ng-click="password_recover()" class="btn unpad txt-blue">Recupera tu contraseña</div>
+    </div>
+    <div ng-if="!error_login &amp;&amp; !recover_ok">
+      <div class="pad-huge"></div>
+      <div class="pad-huge"></div>
+    </div>
+    <div ng-if="error_login">
+      <div class="pad-sm"></div>
+      <div class="alert alert-danger">
+        <div class="glyphicon glyphicon-exclamation-sign txt-huge txt-middle txt-red pad-xs pull-left"></div><span ng-bind="error_login" class="txt-middle txt-red bold"> </span>
+      </div>
+      <div class="pad-sm"></div>
+    </div>
+    <div ng-if="recover_ok">
+      <div class="pad-sm"></div>
+      <div class="alert alert-success">
+        <div class="glyphicon glyphicon-ok txt-huge txt-middle txt-green pad-xs pull-left"></div><span ng-bind="recover_ok" class="txt-middle txt-green bold"> </span>
+      </div>
+      <div class="pad-sm"></div>
+    </div>
+    <div class="col-xs-10 col-xs-offset-1">
+      <button type="submit" ng-disable="!login_form.$validate" id="btn-login" class="btn btn-lg btn-block btn-brd-infolight square">Entrar</button>
+    </div>
+    <div class="clearfix"></div>
+    <div class="pad-md"></div>
+  </form>
+</div>
+<div id="register-container" class="col-xs-12 col-md-6 pad-h-huge">
+  <form id="register_form" name="register_form" ng-submit="register_submit()" novalidate="novalidate" class="pad-v-lg">
+    <div class="text-center">
+      <h1 class="bold">Registro            </h1>
+    </div>
+    <div class="form-group">
+      <label>Nombre de usuario o email</label>
+      <input type="text" name="register_nickname" ng-model="register.nickname" ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }" required="required" ng-minlength="6" ng-pattern="/^[a-z0-9]*$/" autocomplete="off" class="form-control square"/>
+      <div ng-if="checkin.status">
+        <p ng-if="checkin.value" ng-bind-html="checkin.value" class="pad-h-xs"></p>
+        <p ng-if="!checkin.value"><i class="fa fa-spinner fa-pulse pad-h-xs"></i><span>Comprobando disponibilidad</span></p>
+      </div><span ng-show="register_form.$submitted"><span ng-show="register_form.register_nickname.$error.required" class="txt-error">El nombre de usuario es necesario</span><span ng-show="register_form.register_nickname.$error.minlength" class="txt-error">El nombre de usuario ha de ser mayor de cinco caracteres</span><span ng-show="register_form.register_nickname.$error.pattern" class="txt-error">El nombre de usuario puede contener sólo minúsculas y números</span></span>
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" name="register_email" ng-model="register.email" required="required" autocomplete="off" class="form-control square"/><span ng-show="register_form.$submitted"><span ng-show="register_form.register_email.$error.required" class="txt-error">El correo electrónico es necesario</span><span ng-show="register_form.register_email.$error.email" class="txt-error">El correo electrónico ha de ser válido</span></span>
+    </div>
+    <div class="form-group">
+      <label>Contraseña</label>
+      <input type="password" name="register_password" ng-model="register.password" required="required" ng-minlength="6" class="form-control square"/><span ng-if="register_form.$submitted"><span ng-show="register_form.register_password.$error.required" class="txt-error">La contraseña es necesaria</span><span ng-show="register_form.register_password.$error.minlength" class="txt-error">La contraseña ha de ser mayor de cinco caracteres</span></span>
+    </div>
+    <div class="form-group">
+      <label>Repita contraseña</label>
+      <input type="password" name="register_repeat" ng-model="register.repeat" class="form-control square"/><span ng-if="register_form.$submitted"><span ng-show="register_form.register_repeat.$error.unmatch" class="txt-error">Las contraseñas tienen que coincidir</span></span>
+    </div>
+    <div ng-if="!error_register">
+      <div class="pad-xs"></div>
+    </div>
+    <div ng-if="error_register">
+      <div class="pad-sm"></div>
+      <div class="alert alert-danger">
+        <div class="glyphicon glyphicon-exclamation-sign txt-lg txt-middle txt-red pad-h-xs pull-left"></div><span ng-bind="error_register" class="txt-middle txt-red bold"> </span>
+      </div>
+      <div class="pad-sm"></div>
+    </div>
+    <div class="col-xs-10 col-xs-offset-1">
+      <button type="submit" id="btn-login" class="btn btn-lg btn-block btn-brd-infolight square">Registrarme</button>
+    </div>
+    <div class="clearfix"></div>
+    <div class="pad-md"></div>
+  </form>
+</div>
+<div class="clearfix"></div>

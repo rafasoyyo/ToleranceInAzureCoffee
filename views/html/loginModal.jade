@@ -1,0 +1,106 @@
+
+#login-container.col-xs-12.col-md-6.pad-h-huge
+    form#login_form.pad-v-lg(name="login_form", ng-submit="login_submit()", novalidate)
+        
+        .text-center
+            h1.bold Acceso      
+
+        .form-group
+            label Nombre de usuario
+            input.form-control.square(type="text", name="login_nickname", ng-model="login.username", required)
+            span(ng-if="login_form.$submitted")
+                span.txt-error(ng-show="login_form.login_nickname.$error.required") El nombre de usuario es necesario
+        .form-group
+            label Contraseña
+            input.form-control.square(type="password", name="login_password", ng-model="login.password", required)
+            span(ng-if="login_form.$submitted")
+                span.txt-error(ng-show="login_form.login_password.$error.required") La contraseña es necesaria
+            
+        .text-right
+            #forgot-password Has olvidado tu contraseña?
+            .btn.unpad.txt-blue(ng-click='password_recover()') Recupera tu contraseña
+        
+        div(ng-if="!error_login && !recover_ok")
+            .pad-huge
+            .pad-huge
+
+        div(ng-if="error_login")
+            .pad-sm
+            .alert.alert-danger
+                .glyphicon.glyphicon-exclamation-sign.txt-huge.txt-middle.txt-red.pad-xs.pull-left
+                span.txt-middle.txt-red.bold(ng-bind="error_login") 
+            .pad-sm
+
+        div(ng-if="recover_ok")
+            .pad-sm
+            .alert.alert-success
+                .glyphicon.glyphicon-ok.txt-huge.txt-middle.txt-green.pad-xs.pull-left
+                span.txt-middle.txt-green.bold(ng-bind="recover_ok") 
+            .pad-sm
+
+        .col-xs-10.col-xs-offset-1
+            button(type="submit", ng-disable="!login_form.$validate")#btn-login.btn.btn-lg.btn-block.btn-brd-infolight.square Entrar
+        
+        .clearfix
+        .pad-md
+
+
+
+#register-container.col-xs-12.col-md-6.pad-h-huge
+    form#register_form.pad-v-lg(name="register_form", ng-submit="register_submit()", novalidate)
+        
+        .text-center
+            h1.bold Registro            
+
+        .form-group
+            label Nombre de usuario o email
+            input.form-control.square(type="text", name="register_nickname", ng-model="register.nickname", ng-model-options="{ updateOn: 'default blur', debounce: { 'default': 500, 'blur': 0 } }", required, ng-minlength="6", ng-pattern="/^[a-z0-9]*$/", autocomplete="off")
+            div(ng-if="checkin.status")
+                p.pad-h-xs(ng-if="checkin.value", ng-bind-html="checkin.value")
+                p(ng-if="!checkin.value")
+                    i.fa.fa-spinner.fa-pulse.pad-h-xs
+                    span Comprobando disponibilidad
+            span(ng-show="register_form.$submitted")
+                span.txt-error(ng-show="register_form.register_nickname.$error.required") El nombre de usuario es necesario
+                span.txt-error(ng-show="register_form.register_nickname.$error.minlength") El nombre de usuario ha de ser mayor de cinco caracteres
+                span.txt-error(ng-show="register_form.register_nickname.$error.pattern") El nombre de usuario puede contener sólo minúsculas y números
+
+        .form-group
+            label Email
+            input.form-control.square(type="email", name="register_email", ng-model="register.email", required, autocomplete="off")
+            span(ng-show="register_form.$submitted")
+                span.txt-error(ng-show="register_form.register_email.$error.required") El correo electrónico es necesario
+                span.txt-error(ng-show="register_form.register_email.$error.email") El correo electrónico ha de ser válido
+
+        .form-group
+            label Contraseña
+            input.form-control.square(type="password",name="register_password", ng-model="register.password", required, ng-minlength="6")
+            span(ng-if="register_form.$submitted")
+                span.txt-error(ng-show="register_form.register_password.$error.required") La contraseña es necesaria
+                span.txt-error(ng-show="register_form.register_password.$error.minlength") La contraseña ha de ser mayor de cinco caracteres
+
+        .form-group
+            label Repita contraseña
+            input.form-control.square(type="password", name="register_repeat", ng-model="register.repeat")
+            span(ng-if="register_form.$submitted")
+                span.txt-error(ng-show="register_form.register_repeat.$error.unmatch") Las contraseñas tienen que coincidir
+
+
+        div(ng-if="!error_register")
+            .pad-xs
+
+        div(ng-if="error_register")
+            .pad-sm
+            .alert.alert-danger
+                .glyphicon.glyphicon-exclamation-sign.txt-lg.txt-middle.txt-red.pad-h-xs.pull-left
+                span.txt-middle.txt-red.bold(ng-bind="error_register") 
+            .pad-sm
+
+        .col-xs-10.col-xs-offset-1
+            button(type="submit")#btn-login.btn.btn-lg.btn-block.btn-brd-infolight.square Registrarme
+
+        .clearfix
+        .pad-md
+
+
+.clearfix

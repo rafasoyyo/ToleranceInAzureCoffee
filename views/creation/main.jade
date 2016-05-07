@@ -1,0 +1,16 @@
+main
+	.container
+		if !user
+			.pad-huge.bg-success
+				p.txt.txt-lg Ten en cuenta que al no estar logueado, los elementos que generes tendrán que ser validados antes de mostrasrse y no formarán parte de tu perfil.
+			.pad-md
+
+		uib-tabset.tab-tolerance(active="activeJustified" justified="true")
+			uib-tab(index="0" heading="Producto") 
+				include form_producto
+
+			uib-tab(index="1" heading="Comercio") 
+				include form_comercio
+
+			uib-tab(index="2" heading="Afección")  
+				include form_afeccion

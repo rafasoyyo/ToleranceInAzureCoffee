@@ -1,0 +1,50 @@
+
+/* 		.button-brd-variant(@color; @border; @background) 		*/
+
+.btn-brd-gray {
+  .button-brd-variant(@black; @black_l2; @black_l5);
+}
+
+.btn-brd-graylight {
+  .button-brd-variant(@black_l2; @black_l3; @black_l5);
+}
+
+.btn-brd-graylighter {
+  .button-brd-variant(@black_l3; @black_l4; @black_l5);
+}
+
+.btn-brd-primary {
+  .button-brd-variant(@cyan; @cyan_d1);
+}
+
+.btn-brd-success {
+  .button-brd-variant(@green_d1; @green_d2);
+}
+
+.btn-brd-info {
+  .button-brd-variant(@blue_d1; @blue_d2);
+}
+.btn-brd-infolight {
+  .button-brd-variant(@blue_l5; @blue_l3);
+}
+
+.btn-brd-warning {
+  .button-brd-variant(@yellow_d1; @yellow_d2);
+}
+
+.btn-brd-danger {
+  .button-brd-variant(@red_d1; @red_d2);
+}
+
+.btn-brd-white {
+  .button-brd-variant(white;  white);  
+  &:hover, &.hover {
+    color: @black_l5;
+  }
+  &:focus{
+    color: @black_l5;
+  }
+  &:active{
+    color: @black_l5;
+  }
+}

@@ -1,0 +1,31 @@
+.tab-tolerance{
+	ul.nav-tabs li{
+		a{
+			color: @black;
+			font-weight: bold; 
+			border-radius: 2px 2px 0 0;
+			border: 1px solid @gray-lighter;
+		}
+		&.active{
+			a{
+				border: 1px solid @gray-lighter;
+				border-bottom: none 
+			}
+		}
+		&:not(.active){
+			a{
+				// border-color: @gray-lighter !important;
+			}
+		}
+	}
+
+	.tab-content{
+		margin-top: -2px;
+		padding: 30px 15px;
+		border-left: 1px solid @gray-lighter;
+		border-right: 1px solid @gray-lighter;
+		border-bottom: 1px solid @gray-lighter;
+	}
+
+}
+
