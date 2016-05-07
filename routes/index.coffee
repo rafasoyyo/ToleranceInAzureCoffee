@@ -20,7 +20,6 @@ router.get '/', user.isAuthenticated , (req, res, next) ->
 router.route '/elements/all'
     .get (req, res, next) ->
         
-        console.log 'results'
         finder.find_all_items (err, results)->
             console.log results
             if err then return res.status(500).json(err)       

@@ -15,9 +15,8 @@ mongoose = require('mongoose');
 mongoose.connect(mongodb);
 
 // ROUTES IMPORTS
-var routes  = require('./routes/index'),
-    users   = require('./routes/user'),
-    home    = require('./routes/index'),
+var home    = require('./routes/index'),
+    users   = require('./routes/user'),    
     account = require('./routes/account'),
     producto= require('./routes/producto'),
     comercio= require('./routes/comercio'),
@@ -37,15 +36,8 @@ app.set('view engine', 'jade');
 var user = require('./models/userModel');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-app.use(passport.initialize());
-app.use(passport.session());
-passport.use(new LocalStrategy(user.authenticate()));
-passport.serializeUser(user.serializeUser());
-passport.deserializeUser(user.deserializeUser());
-
 var expressSession = require('express-session');
 var MongoStore = require('connect-mongo')(expressSession);
-
 app.use(expressSession({
   secret: 'ToleranceSecretKey',
   resave: false,
@@ -55,6 +47,11 @@ app.use(expressSession({
     ttl: 1 * 24 * 60 * 60
   })
 }));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(user.authenticate()));
+passport.serializeUser(user.serializeUser());
+passport.deserializeUser(user.deserializeUser());
 
 // app.use(favicon(__dirname + '/public/img/favicon.ico'));
 app.use(compression());
