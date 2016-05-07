@@ -26,8 +26,6 @@ router.route '/'
     # SAVE PRODUCT
     .post user.isAuthenticated , files.saveFile('./public/images/items', 'displayImage'), (req, res, next) ->
 
-        console.log req.body.telefono
-
         new_lugar = new Lugar({
             url         : encodeURI(req.body.name)
             nombre      : req.body.name
@@ -48,26 +46,22 @@ router.route '/'
                 new_lugar.revisor  = req.user_id
 
         new_lugar.save (err, lugar)->
-            if err
-                console.log err
-                return res.status(500).send( err.message)
-            console.log 'lugar: ' , lugar
+            if err then return res.redirect 'create' + "?item=comercio&invalid=0"
+
             if req.user
                 user.findOneAndUpdate req.user._id , {$push: {"lugares": lugar._id }}, (err, users)->
                     res.redirect 'comercio/' + lugar.url
             else
-                    res.redirect 'comercio/' + lugar.url
+                res.redirect 'comercio/' + lugar.url
 
 
 
 router.route '/:slug'
     # SEE PRODUCT VIEW
     .get user.isAuthenticated , (req, res, next) ->
-        console.log req.params.slug
+
         Lugar.findOne  {nombre: req.params.slug} , (err, result)->
-            if err or not result 
-                console.log err
-                return res.status(500).send(err)
+            if err or not result then return res.status(500).send(err)
             num_visita = if isNaN(result.visitas) then 1 else result.visitas + 1
             Lugar.findOneAndUpdate {nombre: req.params.slug}  , {visitas: result.visitas + 1}, (err, lugar_found)->                  
                 if err then console.log colors.red(err) 
@@ -75,7 +69,6 @@ router.route '/:slug'
                 lugar = new Lugar(lugar_found)
                 opts = [{ path: 'autor'}, { path: 'revisor'}, { path: 'comentarios.autor' }]            
                 Lugar.populate result, opts, (err, resp)->  
-                    console.log colors.red(resp)
                     if err then return res.status(500).send(err)
 
                     resp.comentarios = resp.comentarios.sort (a, b)->

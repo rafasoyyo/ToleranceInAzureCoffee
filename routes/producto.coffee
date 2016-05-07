@@ -44,15 +44,13 @@ router.route '/'
                 new_product.revisor  = req.user_id
 
         new_product.save (err, product)->
-            if err
-                console.log err
-                return res.status(500).send( err.message)
-            console.log '42' , product
+            if err then return res.redirect 'create' + "?item=producto&invalid=0"
+
             if req.user
                 user.findOneAndUpdate req.user._id , {$push: {"productos": product._id }}, (err, users)->
                     res.redirect 'producto/' + product.url
             else
-                    res.redirect 'producto/' + product.url
+                res.redirect 'producto/' + product.url
 
 
 

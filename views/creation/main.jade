@@ -5,6 +5,15 @@ main
 				p.txt.txt-lg Ten en cuenta que al no estar logueado, los elementos que generes tendrán que ser validados antes de mostrasrse y no formarán parte de tu perfil.
 			.pad-md
 
+		if error && error.id
+			.pad-huge.bg-danger
+				if error.id === "0"
+					if error.tipo === "producto"
+						p.txt.txt-lg Este producto ya existe, prueba con otro nombre!
+					if error.tipo === "comercio"
+						p.txt.txt-lg Este comercio ya existe, prueba con otro nombre!
+			.pad-md
+
 		uib-tabset.tab-tolerance(active="activeJustified" justified="true")
 			uib-tab(index="0" heading="Producto") 
 				include form_producto
@@ -12,5 +21,5 @@ main
 			uib-tab(index="1" heading="Comercio") 
 				include form_comercio
 
-			uib-tab(index="2" heading="Afección")  
-				include form_afeccion
+			//- uib-tab(index="2" heading="Afección")  
+			//- 	include form_afeccion

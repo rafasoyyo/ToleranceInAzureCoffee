@@ -23,6 +23,11 @@ lugarSchema = new Schema({
                 }, {timestamps: true})
 
 
+lugarSchema.post 'init', (result)->
+    console.log result
+    if result.image and result.image.match('public') isnt null
+        result.image = result.image.split('public')[1]
+
 lugarModel = mongoose.model('lugar', lugarSchema)
 
 module.exports = lugarModel

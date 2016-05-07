@@ -44,11 +44,11 @@ router.route '/elements/all'
 # CREATION PAGES
 router.route '/create' 
     .get user.isAuthenticated, (req, res, next) ->
-        
         res.render 'creation/index',
             title   : 'Creation - ToleranceIn'
             pageName: 'Creation'
             user    : req.user
+            error   : {id: req.query.invalid, tipo: req.query.item}
 
     # .post user.isAuthenticated, (req,res,next)->
 

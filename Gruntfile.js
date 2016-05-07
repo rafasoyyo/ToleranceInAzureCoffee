@@ -1,88 +1,89 @@
-'use strict';
+module.exports = function(grunt) {
+    require('jit-grunt')(grunt);
 
-var request = require('request');
-
-module.exports = function (grunt) {
-  // show elapsed time at the end
-  require('time-grunt')(grunt);
-  // load all grunt tasks
-  require('load-grunt-tasks')(grunt);
-
-  var reloadPort = 35729, files;
-
-  grunt.initConfig({
-    pkg: grunt.file.readJSON('package.json'),
-    develop: {
-      server: {
-        file: 'bin/www'
-      }
-    },
-    less: {
-      dist: {
-        files: {
-          'public/css/style.css': 'public/css/style.less'
+    grunt.initConfig({
+        less: {
+            development: {
+                options: {
+                    compress: true,
+                    yuicompress: true,
+                    optimization: 2
+                },
+                files: {
+                    "./public/stylesheets/style.css": "./less/style.less" // destination file and source file
+                }
+            }
+        },
+        coffee: {
+            development: {
+                options: {
+                    // separator: ';',
+                    // join: true,
+                    // sourceMap: true,
+                    bare: true
+                },
+                files: {
+                    './public/javascripts/ng_scripts.js': ['./coffee/angular/*.coffee', './coffee/angular/**/*.coffee'], // compile and concat into single file 
+                    './public/javascripts/scripts.js': ['./coffee/scripts/*.coffee'] // compile and concat into single file 
+                }
+            }
+        },
+        uglify: {
+            // development: {
+                options: {
+                    sourceMap: true
+                    //sourceMapIn: './public/javascripts/*.js.map'
+                },
+                files: {
+                    './public/javascripts/ng_scripts.min.js': ['./public/javascripts/ng_scripts.js'],
+                    './public/javascripts/scripts.min.js': ['./public/javascripts/scripts.js']
+                }
+            // }
+        },
+        jade: {
+            compile: {
+                options: {
+                    // client: false,
+                    pretty: true
+                },
+                files: [{
+                    expand: true,
+                    // flatten: true,
+                    cwd : 'views/html',
+                    src : ['*.jade'],
+                    dest: 'public/templates',
+                    ext : '.html'
+                }]
+            }
+        },
+        livereload: {
+            options: {
+                base: 'public',
+            },
+            files: ['public/**/*']
+        },
+        watch: {
+            styles: {
+                files: ['less/**/*.less'], // which files to watch
+                tasks: ['less'],
+                options: {
+                    nospawn: true
+                }
+            },
+            scripts:{
+                files: ['coffee/*.coffee', 'coffee/**/*.coffee'], // which files to watch
+                tasks: ['coffee']                
+            },
+            ugli:{
+                files: ['public/javascripts/*.js' /*, '!public/javascripts/*.min.js'*/], // which files to watch
+                tasks: ['uglify']  
+            },
+            templates:{
+                files: ['views/**/*.jade'], // which files to watch
+                tasks: ['jade']                
+            }
         }
-      }
-    },
-    watch: {
-      options: {
-        nospawn: true,
-        livereload: reloadPort
-      },
-      server: {
-        files: [
-          'bin/www',
-          'app.js',
-          'routes/*.coffee'
-        ],
-        tasks: ['develop', 'delayed-livereload']
-      },
-      js: {
-        files: ['public/js/*.js'],
-        options: {
-          livereload: reloadPort
-        }
-      },
-      css: {
-        files: [
-          'public/css/*.less'
-        ],
-        tasks: ['less'],
-        options: {
-          livereload: reloadPort
-        }
-      },
-      views: {
-        files: ['views/*.jade'],
-        options: {
-          livereload: reloadPort
-        }
-      }
-    }
-  });
+    });
 
-  grunt.config.requires('watch.server.files');
-  files = grunt.config('watch.server.files');
-  files = grunt.file.expand(files);
-
-  grunt.registerTask('delayed-livereload', 'Live reload after the node server has restarted.', function () {
-    var done = this.async();
-    setTimeout(function () {
-      request.get('http://localhost:' + reloadPort + '/changed?files=' + files.join(','),  function (err, res) {
-          var reloaded = !err && res.statusCode === 200;
-          if (reloaded) {
-            grunt.log.ok('Delayed live reload successful.');
-          } else {
-            grunt.log.error('Unable to make a delayed live reload.');
-          }
-          done(reloaded);
-        });
-    }, 500);
-  });
-
-  grunt.registerTask('default', [
-    'less',
-    'develop',
-    'watch'
-  ]);
+grunt.registerTask('default', ['less', 'coffee', 'uglify', 'jade', 'livereload', 'watch']);
 };
