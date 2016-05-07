@@ -1,11 +1,12 @@
 require('coffee-script/register');
 
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
+var express     = require('express');
+var path        = require('path');
+var favicon     = require('serve-favicon');
+var logger      = require('morgan');
+var compression = require('compression');
+var cookieParser= require('cookie-parser');
+var bodyParser  = require('body-parser');
 
 config = require('./config');
 
@@ -29,11 +30,34 @@ app.locals.ENV = env;
 app.locals.ENV_DEVELOPMENT = env == 'development';
 
 // view engine setup
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+// User auth
+var user = require('./models/userModel');
+var passport = require('passport');
+var LocalStrategy = require('passport-local').Strategy;
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(user.authenticate()));
+passport.serializeUser(user.serializeUser());
+passport.deserializeUser(user.deserializeUser());
+
+var expressSession = require('express-session');
+var MongoStore = require('connect-mongo')(expressSession);
+
+app.use(expressSession({
+  secret: 'ToleranceSecretKey',
+  resave: false,
+  saveUninitialized: true,
+  store: new MongoStore({
+    mongooseConnection: mongoose.connection,
+    ttl: 1 * 24 * 60 * 60
+  })
+}));
+
 // app.use(favicon(__dirname + '/public/img/favicon.ico'));
+app.use(compression());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
