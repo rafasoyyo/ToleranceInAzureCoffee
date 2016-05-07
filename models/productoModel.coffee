@@ -17,7 +17,7 @@ productoSchema = new Schema({
                             visitas     : { type : Number , min: 0, default: 0   }
                             lugar       : { type : Schema.ObjectId, ref: 'lugar' }
                             revisor     : { type : Schema.ObjectId, ref: 'user'  }
-                            autor       : { type : Schema.ObjectId, ref: 'user', default: "571d3e6ce83b3f8f15ed61aa" }
+                            autor       : { type : Schema.ObjectId, ref: 'user', default: "572e3471124d12207cae6246" }
                             comentarios : [ comentarioSchema ]
                 }, {timestamps: true})
 

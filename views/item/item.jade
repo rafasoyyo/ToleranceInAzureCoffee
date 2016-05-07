@@ -20,7 +20,7 @@ block content
             .pad-xs
 
             .pad-h-md.pad-v-lg.bg-info
-                h4.bold.unmar Autor:   
+                h4.bold.unmar Autor:
                     .pad-v-xs
                     img.img-circle.inline(src="#{ item.autor.image || '/images/user.png' }", width="100", height="100", alt='user')      
                     if user && item.autor.nombre != 'Anónimo'
@@ -28,7 +28,7 @@ block content
                     else
                         .unmar.inline.pad-h-xs #{item.autor.nombre}
 
-            if user && (item.autor._id === user._id || user.rol != 'USER')
+            if user && (item.autor._id === user._id || user.rol != 'user')
                 .pad-xs
                 a.btn.btn-lg.btn-block.btn-brd-infolight.square(href="/#{ item.clase + '/edit/' + item.url}") Editar esta ficha
 
@@ -88,4 +88,4 @@ block content
 
         .clearfix
         .pad-huge
-        p #{item}
+        //- p #{item}

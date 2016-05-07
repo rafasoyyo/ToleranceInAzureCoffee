@@ -29,7 +29,7 @@ afeccionSchema = new Schema({
                             validado    : { type : Boolean, default: false}
                             visitas     : { type : Number , min: 0, default: 0 }
                             revisor     : { type : Schema.ObjectId, ref: 'user'}
-                            autor       : { type : Schema.ObjectId, ref: 'user', default: '57042cdb9302bc86384b3f57'}
+                            autor       : { type : Schema.ObjectId, ref: 'user', default: '572e3471124d12207cae6246'}
                             comentarios : [ comentarioSchema ]
                 }, {timestamps: true})
 

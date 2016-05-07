@@ -126,7 +126,7 @@ router.route '/comment'
     .post user.isAuthenticated, (req, res, next) -> 
         
         new_comment = {
-                        autor: if req.user then req.user._id else '57042cdb9302bc86384b3f57'
+                        autor: if req.user then req.user._id else '572e3471124d12207cae6246'
                         mensaje: req.body.comentario
                         created: Date.now()
         }

@@ -15,7 +15,7 @@ Schema   = mongoose.Schema
 # @method comentarioSchema
 ###
 comentarioSchema = new Schema({
-                                autor  : { type : Schema.ObjectId, ref: 'user', default: "57042cdb9302bc86384b3f57" }
+                                autor  : { type : Schema.ObjectId, ref: 'user', default: "572e3471124d12207cae6246" }
                                 mensaje: { type : String }
                                 created: { type : Date   }
                     })
