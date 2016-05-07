@@ -16,7 +16,7 @@ mongoose.connect(mongodb);
 
 // ROUTES IMPORTS
 var home    = require('./routes/index'),
-    users   = require('./routes/user'),    
+    users   = require('./routes/users'),    
     account = require('./routes/account'),
     producto= require('./routes/producto'),
     comercio= require('./routes/comercio'),
